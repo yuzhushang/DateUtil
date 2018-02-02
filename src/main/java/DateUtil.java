@@ -18,7 +18,7 @@ public class DateUtil {
      */
     public static LocalDate getFirstDayOfWeek(String date){
         LocalDate inputDate = LocalDate.parse(date);
-        TemporalAdjuster FIRST_OF_WEEK = TemporalAdjusters.ofDateAdjuster(localDate -> localDate.plusDays(localDate.getDayOfWeek().getValue()-DayOfWeek.MONDAY.getValue()));
+        TemporalAdjuster FIRST_OF_WEEK = TemporalAdjusters.ofDateAdjuster(localDate -> localDate.minusDays(localDate.getDayOfWeek().getValue()-DayOfWeek.MONDAY.getValue()));
         return inputDate.with(FIRST_OF_WEEK);
     }
 
@@ -65,6 +65,6 @@ public class DateUtil {
 
     public static void main(String[] args) {
         System.out.println(getWeek("2017-01-10", "2017-01-20"));
-        System.out.println(getFirstDayOfWeek("2017-01-10"));
+//        System.out.println(getFirstDayOfWeek("2017-01-10"));
     }
 }
