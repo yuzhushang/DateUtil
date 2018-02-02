@@ -50,9 +50,15 @@ public class DateUtil {
         return weekDayList;
     }
 
-    public static List<String> getWeek(String beginDate, String endDate){
+    /**
+     * 返回输入日期的之间的自然周日期
+     *
+     * @param beginDate 格式：yyyy-MM-dd
+     * @param endDate 格式：yyyy-MM-dd
+     * @return ["weekBegin|weekEnd"]
+     */
+    public static List<String> getWeekDay(String beginDate, String endDate){
         LocalDate beginMonday = getFirstDayOfWeek(beginDate);
-        System.out.println(beginMonday);
         LocalDate endSunDay = getLastDayOfWeek(endDate);
         List<String> dayList = new ArrayList<>();
         while (beginMonday.isBefore(endSunDay)){
@@ -64,7 +70,7 @@ public class DateUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(getWeek("2017-01-10", "2017-01-20"));
+        System.out.println(getWeekDay("2017-01-10", "2017-01-20"));
 //        System.out.println(getFirstDayOfWeek("2017-01-10"));
     }
 }
