@@ -1,5 +1,8 @@
+package date;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
@@ -8,6 +11,8 @@ import java.util.List;
 /**
  * @Author 张东斌
  * @Date 2018/2/1 17:59
+ *
+ * 日期工具类
  */
 public class DateUtil {
     /**
@@ -53,24 +58,38 @@ public class DateUtil {
     /**
      * 返回输入日期的之间的自然周日期
      *
-     * @param beginDate 格式：yyyy-MM-dd
-     * @param endDate 格式：yyyy-MM-dd
+     * @param beginDate 开始时间，格式：yyyy-MM-dd
+     * @param endDate 结束时间，格式：yyyy-MM-dd
      * @return ["weekBegin|weekEnd"]
      */
-    public static List<String> getWeekDay(String beginDate, String endDate){
+    public static List<String> getWeekList(String beginDate, String endDate){
         LocalDate beginMonday = getFirstDayOfWeek(beginDate);
         LocalDate endSunDay = getLastDayOfWeek(endDate);
         List<String> dayList = new ArrayList<>();
         while (beginMonday.isBefore(endSunDay)){
-            LocalDate beginMonday_ = beginMonday.plusDays(6);
-            dayList.add(beginMonday.toString() + "|" + beginMonday_.toString());
-            beginMonday = beginMonday_;
+            LocalDate sunday_ = beginMonday.plusDays(6);
+            dayList.add(beginMonday.toString() + "|" + sunday_.toString());
+            beginMonday = beginMonday.plusDays(7);
         }
         return dayList;
     }
 
+    /**
+     * 计算beginDate 与 endDate之间相差自然周数量
+     *
+     * @param beginDate 开始时间，格式：yyyy-MM-dd
+     * @param endDate 结束时间，格式：yyyy-MM-dd
+     * @return
+     */
+    public static long betweenWeekNum(String beginDate, String endDate){
+        LocalDate beginMonday = getFirstDayOfWeek(beginDate);
+        LocalDate endMonday = getFirstDayOfWeek(endDate);
+        return ChronoUnit.WEEKS.between(beginMonday, endMonday);
+    }
+
     public static void main(String[] args) {
-        System.out.println(getWeekDay("2017-01-10", "2017-01-20"));
+        System.out.println(getWeekList("2017-01-10", "2017-01-20"));
+        System.out.println(betweenWeekNum("2017-01-10", "2017-01-20"));
 //        System.out.println(getFirstDayOfWeek("2017-01-10"));
     }
 }
