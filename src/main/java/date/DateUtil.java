@@ -7,6 +7,7 @@ import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Author 张东斌
@@ -18,7 +19,7 @@ public class DateUtil {
     /**
      * 返回输入日期所在周的周一日期
      *
-     * @param date 格式：yyyy-MM-dd
+     * @param date 格式：yyyy-MM-dd, not null
      * @return
      */
     public static LocalDate getFirstDayOfWeek(String date){
@@ -30,7 +31,7 @@ public class DateUtil {
     /**
      * 返回输入日期所在周的周末日期
      *
-     * @param date 格式：yyyy-MM-dd
+     * @param date 格式：yyyy-MM-dd, not null
      * @return
      */
     public static LocalDate getLastDayOfWeek(String date){
@@ -78,18 +79,14 @@ public class DateUtil {
      * 计算beginDate 与 endDate之间相差自然周数量
      *
      * @param beginDate 开始时间，格式：yyyy-MM-dd
-     * @param endDate 结束时间，格式：yyyy-MM-dd
-     * @return
+     * @param endDate 结束时间，格式：yyyy-MM-dd，not null
+     * @return 输入时间相差的自然周数量，not null
      */
     public static long betweenWeekNum(String beginDate, String endDate){
+//        Objects.requireNonNull(beginDate);
+//        Objects.requireNonNull(endDate);
         LocalDate beginMonday = getFirstDayOfWeek(beginDate);
         LocalDate endMonday = getFirstDayOfWeek(endDate);
         return ChronoUnit.WEEKS.between(beginMonday, endMonday);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getWeekList("2017-01-10", "2017-01-20"));
-        System.out.println(betweenWeekNum("2017-01-10", "2017-01-20"));
-//        System.out.println(getFirstDayOfWeek("2017-01-10"));
     }
 }
