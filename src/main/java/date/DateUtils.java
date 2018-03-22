@@ -15,7 +15,7 @@ import java.util.Objects;
  *
  * 日期工具类
  */
-public class DateUtil {
+public class DateUtils {
     /**
      * 返回输入日期所在周的周一日期
      *
@@ -57,7 +57,7 @@ public class DateUtil {
     }
 
     /**
-     * 返回输入日期的之间的自然周日期
+     * 返回输入日期的之间的自然周日期，包含结束时间所在周，开始时间所在周
      *
      * @param beginDate 开始时间，格式：yyyy-MM-dd
      * @param endDate 结束时间，格式：yyyy-MM-dd
@@ -80,7 +80,7 @@ public class DateUtil {
      *
      * @param beginDate 开始时间，格式：yyyy-MM-dd
      * @param endDate 结束时间，格式：yyyy-MM-dd，not null
-     * @return 输入时间相差的自然周数量，not null
+     * @return 两个时间相差的自然周数量，not null
      */
     public static long betweenWeekNum(String beginDate, String endDate){
 //        Objects.requireNonNull(beginDate);
