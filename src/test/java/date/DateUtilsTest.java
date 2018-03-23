@@ -1,5 +1,6 @@
 package date;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,5 +32,18 @@ public class DateUtilsTest {
     @Test
     public void betweenWeekNumTest() {
         Assert.assertEquals(DateUtils.betweenWeekNum("2018-01-07", "2018-01-08"), 1);
+    }
+
+    @Test
+    public void test(){
+        String s1 = s(null);
+    }
+
+    /**
+     * @param s
+     * @return
+     */
+    public String s(@Nullable String s){
+        return "";
     }
 }
